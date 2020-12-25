@@ -10,9 +10,9 @@ defmodule Ethereum.Eth.V1alpha1.Attestation do
 
   defstruct [:aggregation_bits, :data, :signature]
 
-  field :aggregation_bits, 1, type: :bytes
-  field :data, 2, type: Ethereum.Eth.V1alpha1.AttestationData
-  field :signature, 3, type: :bytes
+  field(:aggregation_bits, 1, type: :bytes)
+  field(:data, 2, type: Ethereum.Eth.V1alpha1.AttestationData)
+  field(:signature, 3, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AggregateAttestationAndProof do
@@ -27,9 +27,9 @@ defmodule Ethereum.Eth.V1alpha1.AggregateAttestationAndProof do
 
   defstruct [:aggregator_index, :aggregate, :selection_proof]
 
-  field :aggregator_index, 1, type: :uint64
-  field :aggregate, 3, type: Ethereum.Eth.V1alpha1.Attestation
-  field :selection_proof, 2, type: :bytes
+  field(:aggregator_index, 1, type: :uint64)
+  field(:aggregate, 3, type: Ethereum.Eth.V1alpha1.Attestation)
+  field(:selection_proof, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.SignedAggregateAttestationAndProof do
@@ -43,8 +43,8 @@ defmodule Ethereum.Eth.V1alpha1.SignedAggregateAttestationAndProof do
 
   defstruct [:message, :signature]
 
-  field :message, 1, type: Ethereum.Eth.V1alpha1.AggregateAttestationAndProof
-  field :signature, 2, type: :bytes
+  field(:message, 1, type: Ethereum.Eth.V1alpha1.AggregateAttestationAndProof)
+  field(:signature, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AttestationData do
@@ -61,11 +61,11 @@ defmodule Ethereum.Eth.V1alpha1.AttestationData do
 
   defstruct [:slot, :committee_index, :beacon_block_root, :source, :target]
 
-  field :slot, 1, type: :uint64
-  field :committee_index, 2, type: :uint64
-  field :beacon_block_root, 3, type: :bytes
-  field :source, 4, type: Ethereum.Eth.V1alpha1.Checkpoint
-  field :target, 5, type: Ethereum.Eth.V1alpha1.Checkpoint
+  field(:slot, 1, type: :uint64)
+  field(:committee_index, 2, type: :uint64)
+  field(:beacon_block_root, 3, type: :bytes)
+  field(:source, 4, type: Ethereum.Eth.V1alpha1.Checkpoint)
+  field(:target, 5, type: Ethereum.Eth.V1alpha1.Checkpoint)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Checkpoint do
@@ -79,6 +79,6 @@ defmodule Ethereum.Eth.V1alpha1.Checkpoint do
 
   defstruct [:epoch, :root]
 
-  field :epoch, 1, type: :uint64
-  field :root, 2, type: :bytes
+  field(:epoch, 1, type: :uint64)
+  field(:root, 2, type: :bytes)
 end

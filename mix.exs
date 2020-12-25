@@ -14,7 +14,8 @@ defmodule FinalMix.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {FinalMix, []}
     ]
   end
 
@@ -22,6 +23,7 @@ defmodule FinalMix.MixProject do
   defp deps do
     [
       {:grpc, github: "elixir-grpc/grpc"},
+      {:cubdb, "~> 0.17.0"},
       {:cowlib, "~> 2.9.0", override: true}
     ]
   end

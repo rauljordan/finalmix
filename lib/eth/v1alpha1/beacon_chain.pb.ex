@@ -1,13 +1,18 @@
+defmodule Google.Protobuf.Empty do
+  @moduledoc false
+  use Protobuf, syntax: :proto3
+end
+
 defmodule Ethereum.Eth.V1alpha1.SetAction do
   @moduledoc false
   use Protobuf, enum: true, syntax: :proto3
   @type t :: integer | :ADD_VALIDATOR_KEYS | :REMOVE_VALIDATOR_KEYS | :SET_VALIDATOR_KEYS
 
-  field :ADD_VALIDATOR_KEYS, 0
+  field(:ADD_VALIDATOR_KEYS, 0)
 
-  field :REMOVE_VALIDATOR_KEYS, 1
+  field(:REMOVE_VALIDATOR_KEYS, 1)
 
-  field :SET_VALIDATOR_KEYS, 2
+  field(:SET_VALIDATOR_KEYS, 2)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorChangeSet do
@@ -21,8 +26,8 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorChangeSet do
 
   defstruct [:action, :public_keys]
 
-  field :action, 1, type: Ethereum.Eth.V1alpha1.SetAction, enum: true
-  field :public_keys, 2, repeated: true, type: :bytes
+  field(:action, 1, type: Ethereum.Eth.V1alpha1.SetAction, enum: true)
+  field(:public_keys, 2, repeated: true, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListIndexedAttestationsRequest do
@@ -37,11 +42,11 @@ defmodule Ethereum.Eth.V1alpha1.ListIndexedAttestationsRequest do
 
   defstruct [:query_filter, :page_size, :page_token]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis_epoch, 2, type: :bool, oneof: 0
-  field :page_size, 3, type: :int32
-  field :page_token, 4, type: :string
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis_epoch, 2, type: :bool, oneof: 0)
+  field(:page_size, 3, type: :int32)
+  field(:page_token, 4, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListAttestationsRequest do
@@ -56,11 +61,11 @@ defmodule Ethereum.Eth.V1alpha1.ListAttestationsRequest do
 
   defstruct [:query_filter, :page_size, :page_token]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis_epoch, 2, type: :bool, oneof: 0
-  field :page_size, 3, type: :int32
-  field :page_token, 4, type: :string
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis_epoch, 2, type: :bool, oneof: 0)
+  field(:page_size, 3, type: :int32)
+  field(:page_token, 4, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListAttestationsResponse do
@@ -75,9 +80,9 @@ defmodule Ethereum.Eth.V1alpha1.ListAttestationsResponse do
 
   defstruct [:attestations, :next_page_token, :total_size]
 
-  field :attestations, 1, repeated: true, type: Ethereum.Eth.V1alpha1.Attestation
-  field :next_page_token, 2, type: :string
-  field :total_size, 3, type: :int32
+  field(:attestations, 1, repeated: true, type: Ethereum.Eth.V1alpha1.Attestation)
+  field(:next_page_token, 2, type: :string)
+  field(:total_size, 3, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListIndexedAttestationsResponse do
@@ -92,9 +97,9 @@ defmodule Ethereum.Eth.V1alpha1.ListIndexedAttestationsResponse do
 
   defstruct [:indexed_attestations, :next_page_token, :total_size]
 
-  field :indexed_attestations, 1, repeated: true, type: Ethereum.Eth.V1alpha1.IndexedAttestation
-  field :next_page_token, 2, type: :string
-  field :total_size, 3, type: :int32
+  field(:indexed_attestations, 1, repeated: true, type: Ethereum.Eth.V1alpha1.IndexedAttestation)
+  field(:next_page_token, 2, type: :string)
+  field(:total_size, 3, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListBlocksRequest do
@@ -109,13 +114,13 @@ defmodule Ethereum.Eth.V1alpha1.ListBlocksRequest do
 
   defstruct [:query_filter, :page_size, :page_token]
 
-  oneof :query_filter, 0
-  field :root, 1, type: :bytes, oneof: 0
-  field :slot, 2, type: :uint64, oneof: 0
-  field :epoch, 3, type: :uint64, oneof: 0
-  field :genesis, 4, type: :bool, oneof: 0
-  field :page_size, 5, type: :int32
-  field :page_token, 6, type: :string
+  oneof(:query_filter, 0)
+  field(:root, 1, type: :bytes, oneof: 0)
+  field(:slot, 2, type: :uint64, oneof: 0)
+  field(:epoch, 3, type: :uint64, oneof: 0)
+  field(:genesis, 4, type: :bool, oneof: 0)
+  field(:page_size, 5, type: :int32)
+  field(:page_token, 6, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListBlocksResponse do
@@ -130,9 +135,9 @@ defmodule Ethereum.Eth.V1alpha1.ListBlocksResponse do
 
   defstruct [:blockContainers, :next_page_token, :total_size]
 
-  field :blockContainers, 1, repeated: true, type: Ethereum.Eth.V1alpha1.BeaconBlockContainer
-  field :next_page_token, 2, type: :string
-  field :total_size, 3, type: :int32
+  field(:blockContainers, 1, repeated: true, type: Ethereum.Eth.V1alpha1.BeaconBlockContainer)
+  field(:next_page_token, 2, type: :string)
+  field(:total_size, 3, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconBlockContainer do
@@ -146,8 +151,8 @@ defmodule Ethereum.Eth.V1alpha1.BeaconBlockContainer do
 
   defstruct [:block, :block_root]
 
-  field :block, 1, type: Ethereum.Eth.V1alpha1.SignedBeaconBlock
-  field :block_root, 2, type: :bytes
+  field(:block, 1, type: Ethereum.Eth.V1alpha1.SignedBeaconBlock)
+  field(:block_root, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ChainHead do
@@ -184,18 +189,18 @@ defmodule Ethereum.Eth.V1alpha1.ChainHead do
     :previous_justified_block_root
   ]
 
-  field :head_slot, 1, type: :uint64
-  field :head_epoch, 2, type: :uint64
-  field :head_block_root, 3, type: :bytes
-  field :finalized_slot, 4, type: :uint64
-  field :finalized_epoch, 5, type: :uint64
-  field :finalized_block_root, 6, type: :bytes
-  field :justified_slot, 7, type: :uint64
-  field :justified_epoch, 8, type: :uint64
-  field :justified_block_root, 9, type: :bytes
-  field :previous_justified_slot, 10, type: :uint64
-  field :previous_justified_epoch, 11, type: :uint64
-  field :previous_justified_block_root, 12, type: :bytes
+  field(:head_slot, 1, type: :uint64)
+  field(:head_epoch, 2, type: :uint64)
+  field(:head_block_root, 3, type: :bytes)
+  field(:finalized_slot, 4, type: :uint64)
+  field(:finalized_epoch, 5, type: :uint64)
+  field(:finalized_block_root, 6, type: :bytes)
+  field(:justified_slot, 7, type: :uint64)
+  field(:justified_epoch, 8, type: :uint64)
+  field(:justified_block_root, 9, type: :bytes)
+  field(:previous_justified_slot, 10, type: :uint64)
+  field(:previous_justified_epoch, 11, type: :uint64)
+  field(:previous_justified_block_root, 12, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListCommitteesRequest do
@@ -208,9 +213,9 @@ defmodule Ethereum.Eth.V1alpha1.ListCommitteesRequest do
 
   defstruct [:query_filter]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis, 2, type: :bool, oneof: 0
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis, 2, type: :bool, oneof: 0)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteeItem do
@@ -223,7 +228,7 @@ defmodule Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteeItem do
 
   defstruct [:validator_indices]
 
-  field :validator_indices, 1, repeated: true, type: :uint64
+  field(:validator_indices, 1, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesList do
@@ -236,7 +241,7 @@ defmodule Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesList do
 
   defstruct [:committees]
 
-  field :committees, 1, repeated: true, type: Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteeItem
+  field(:committees, 1, repeated: true, type: Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteeItem)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesEntry do
@@ -250,8 +255,8 @@ defmodule Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesEntry do
 
   defstruct [:key, :value]
 
-  field :key, 1, type: :uint64
-  field :value, 2, type: Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesList
+  field(:key, 1, type: :uint64)
+  field(:value, 2, type: Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesList)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconCommittees do
@@ -268,14 +273,15 @@ defmodule Ethereum.Eth.V1alpha1.BeaconCommittees do
 
   defstruct [:epoch, :committees, :active_validator_count]
 
-  field :epoch, 1, type: :uint64
+  field(:epoch, 1, type: :uint64)
 
-  field :committees, 2,
+  field(:committees, 2,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.BeaconCommittees.CommitteesEntry,
     map: true
+  )
 
-  field :active_validator_count, 3, type: :uint64
+  field(:active_validator_count, 3, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListValidatorBalancesRequest do
@@ -292,13 +298,13 @@ defmodule Ethereum.Eth.V1alpha1.ListValidatorBalancesRequest do
 
   defstruct [:query_filter, :public_keys, :indices, :page_size, :page_token]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis, 2, type: :bool, oneof: 0
-  field :public_keys, 3, repeated: true, type: :bytes
-  field :indices, 4, repeated: true, type: :uint64
-  field :page_size, 5, type: :int32
-  field :page_token, 6, type: :string
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis, 2, type: :bool, oneof: 0)
+  field(:public_keys, 3, repeated: true, type: :bytes)
+  field(:indices, 4, repeated: true, type: :uint64)
+  field(:page_size, 5, type: :int32)
+  field(:page_token, 6, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorBalances.Balance do
@@ -314,10 +320,10 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorBalances.Balance do
 
   defstruct [:public_key, :index, :balance, :status]
 
-  field :public_key, 1, type: :bytes
-  field :index, 2, type: :uint64
-  field :balance, 3, type: :uint64
-  field :status, 4, type: :string
+  field(:public_key, 1, type: :bytes)
+  field(:index, 2, type: :uint64)
+  field(:balance, 3, type: :uint64)
+  field(:status, 4, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorBalances do
@@ -333,10 +339,10 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorBalances do
 
   defstruct [:epoch, :balances, :next_page_token, :total_size]
 
-  field :epoch, 1, type: :uint64
-  field :balances, 2, repeated: true, type: Ethereum.Eth.V1alpha1.ValidatorBalances.Balance
-  field :next_page_token, 3, type: :string
-  field :total_size, 4, type: :int32
+  field(:epoch, 1, type: :uint64)
+  field(:balances, 2, repeated: true, type: Ethereum.Eth.V1alpha1.ValidatorBalances.Balance)
+  field(:next_page_token, 3, type: :string)
+  field(:total_size, 4, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListValidatorsRequest do
@@ -354,14 +360,14 @@ defmodule Ethereum.Eth.V1alpha1.ListValidatorsRequest do
 
   defstruct [:query_filter, :active, :page_size, :page_token, :public_keys, :indices]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis, 2, type: :bool, oneof: 0
-  field :active, 3, type: :bool
-  field :page_size, 4, type: :int32
-  field :page_token, 5, type: :string
-  field :public_keys, 6, repeated: true, type: :bytes
-  field :indices, 7, repeated: true, type: :uint64
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis, 2, type: :bool, oneof: 0)
+  field(:active, 3, type: :bool)
+  field(:page_size, 4, type: :int32)
+  field(:page_token, 5, type: :string)
+  field(:public_keys, 6, repeated: true, type: :bytes)
+  field(:indices, 7, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.GetValidatorRequest do
@@ -374,9 +380,9 @@ defmodule Ethereum.Eth.V1alpha1.GetValidatorRequest do
 
   defstruct [:query_filter]
 
-  oneof :query_filter, 0
-  field :index, 1, type: :uint64, oneof: 0
-  field :public_key, 2, type: :bytes, oneof: 0
+  oneof(:query_filter, 0)
+  field(:index, 1, type: :uint64, oneof: 0)
+  field(:public_key, 2, type: :bytes, oneof: 0)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Validators.ValidatorContainer do
@@ -390,8 +396,8 @@ defmodule Ethereum.Eth.V1alpha1.Validators.ValidatorContainer do
 
   defstruct [:index, :validator]
 
-  field :index, 1, type: :uint64
-  field :validator, 2, type: Ethereum.Eth.V1alpha1.Validator
+  field(:index, 1, type: :uint64)
+  field(:validator, 2, type: Ethereum.Eth.V1alpha1.Validator)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Validators do
@@ -407,14 +413,15 @@ defmodule Ethereum.Eth.V1alpha1.Validators do
 
   defstruct [:epoch, :validator_list, :next_page_token, :total_size]
 
-  field :epoch, 1, type: :uint64
+  field(:epoch, 1, type: :uint64)
 
-  field :validator_list, 2,
+  field(:validator_list, 2,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.Validators.ValidatorContainer
+  )
 
-  field :next_page_token, 3, type: :string
-  field :total_size, 4, type: :int32
+  field(:next_page_token, 3, type: :string)
+  field(:total_size, 4, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.GetValidatorActiveSetChangesRequest do
@@ -427,9 +434,9 @@ defmodule Ethereum.Eth.V1alpha1.GetValidatorActiveSetChangesRequest do
 
   defstruct [:query_filter]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis, 2, type: :bool, oneof: 0
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis, 2, type: :bool, oneof: 0)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ActiveSetChanges do
@@ -460,15 +467,15 @@ defmodule Ethereum.Eth.V1alpha1.ActiveSetChanges do
     :ejected_indices
   ]
 
-  field :epoch, 1, type: :uint64
-  field :activated_public_keys, 2, repeated: true, type: :bytes
-  field :activated_indices, 3, repeated: true, type: :uint64
-  field :exited_public_keys, 4, repeated: true, type: :bytes
-  field :exited_indices, 5, repeated: true, type: :uint64
-  field :slashed_public_keys, 6, repeated: true, type: :bytes
-  field :slashed_indices, 7, repeated: true, type: :uint64
-  field :ejected_public_keys, 8, repeated: true, type: :bytes
-  field :ejected_indices, 9, repeated: true, type: :uint64
+  field(:epoch, 1, type: :uint64)
+  field(:activated_public_keys, 2, repeated: true, type: :bytes)
+  field(:activated_indices, 3, repeated: true, type: :uint64)
+  field(:exited_public_keys, 4, repeated: true, type: :bytes)
+  field(:exited_indices, 5, repeated: true, type: :uint64)
+  field(:slashed_public_keys, 6, repeated: true, type: :bytes)
+  field(:slashed_indices, 7, repeated: true, type: :uint64)
+  field(:ejected_public_keys, 8, repeated: true, type: :bytes)
+  field(:ejected_indices, 9, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorPerformanceRequest do
@@ -482,8 +489,8 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorPerformanceRequest do
 
   defstruct [:public_keys, :indices]
 
-  field :public_keys, 1, repeated: true, type: :bytes, deprecated: true
-  field :indices, 2, repeated: true, type: :uint64
+  field(:public_keys, 1, repeated: true, type: :bytes, deprecated: true)
+  field(:indices, 2, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorPerformanceResponse do
@@ -518,17 +525,17 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorPerformanceResponse do
     :public_keys
   ]
 
-  field :current_effective_balances, 1, repeated: true, type: :uint64
-  field :inclusion_slots, 2, repeated: true, type: :uint64
-  field :inclusion_distances, 3, repeated: true, type: :uint64
-  field :correctly_voted_source, 4, repeated: true, type: :bool
-  field :correctly_voted_target, 5, repeated: true, type: :bool
-  field :correctly_voted_head, 6, repeated: true, type: :bool
-  field :balances_before_epoch_transition, 7, repeated: true, type: :uint64
-  field :balances_after_epoch_transition, 8, repeated: true, type: :uint64
-  field :missing_validators, 9, repeated: true, type: :bytes
-  field :average_active_validator_balance, 10, type: :float
-  field :public_keys, 11, repeated: true, type: :bytes
+  field(:current_effective_balances, 1, repeated: true, type: :uint64)
+  field(:inclusion_slots, 2, repeated: true, type: :uint64)
+  field(:inclusion_distances, 3, repeated: true, type: :uint64)
+  field(:correctly_voted_source, 4, repeated: true, type: :bool)
+  field(:correctly_voted_target, 5, repeated: true, type: :bool)
+  field(:correctly_voted_head, 6, repeated: true, type: :bool)
+  field(:balances_before_epoch_transition, 7, repeated: true, type: :uint64)
+  field(:balances_after_epoch_transition, 8, repeated: true, type: :uint64)
+  field(:missing_validators, 9, repeated: true, type: :bytes)
+  field(:average_active_validator_balance, 10, type: :float)
+  field(:public_keys, 11, repeated: true, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorQueue do
@@ -551,11 +558,11 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorQueue do
     :exit_validator_indices
   ]
 
-  field :churn_limit, 1, type: :uint64
-  field :activation_public_keys, 2, repeated: true, type: :bytes, deprecated: true
-  field :exit_public_keys, 3, repeated: true, type: :bytes, deprecated: true
-  field :activation_validator_indices, 4, repeated: true, type: :uint64
-  field :exit_validator_indices, 5, repeated: true, type: :uint64
+  field(:churn_limit, 1, type: :uint64)
+  field(:activation_public_keys, 2, repeated: true, type: :bytes, deprecated: true)
+  field(:exit_public_keys, 3, repeated: true, type: :bytes, deprecated: true)
+  field(:activation_validator_indices, 4, repeated: true, type: :uint64)
+  field(:exit_validator_indices, 5, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ListValidatorAssignmentsRequest do
@@ -572,13 +579,13 @@ defmodule Ethereum.Eth.V1alpha1.ListValidatorAssignmentsRequest do
 
   defstruct [:query_filter, :public_keys, :indices, :page_size, :page_token]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis, 2, type: :bool, oneof: 0
-  field :public_keys, 3, repeated: true, type: :bytes
-  field :indices, 4, repeated: true, type: :uint64
-  field :page_size, 5, type: :int32
-  field :page_token, 6, type: :string
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis, 2, type: :bool, oneof: 0)
+  field(:public_keys, 3, repeated: true, type: :bytes)
+  field(:indices, 4, repeated: true, type: :uint64)
+  field(:page_size, 5, type: :int32)
+  field(:page_token, 6, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorAssignments.CommitteeAssignment do
@@ -603,12 +610,12 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorAssignments.CommitteeAssignment do
     :validator_index
   ]
 
-  field :beacon_committees, 1, repeated: true, type: :uint64
-  field :committee_index, 2, type: :uint64
-  field :attester_slot, 3, type: :uint64
-  field :proposer_slots, 4, repeated: true, type: :uint64
-  field :public_key, 5, type: :bytes, deprecated: true
-  field :validator_index, 6, type: :uint64
+  field(:beacon_committees, 1, repeated: true, type: :uint64)
+  field(:committee_index, 2, type: :uint64)
+  field(:attester_slot, 3, type: :uint64)
+  field(:proposer_slots, 4, repeated: true, type: :uint64)
+  field(:public_key, 5, type: :bytes, deprecated: true)
+  field(:validator_index, 6, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorAssignments do
@@ -624,14 +631,15 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorAssignments do
 
   defstruct [:epoch, :assignments, :next_page_token, :total_size]
 
-  field :epoch, 1, type: :uint64
+  field(:epoch, 1, type: :uint64)
 
-  field :assignments, 2,
+  field(:assignments, 2,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.ValidatorAssignments.CommitteeAssignment
+  )
 
-  field :next_page_token, 3, type: :string
-  field :total_size, 4, type: :int32
+  field(:next_page_token, 3, type: :string)
+  field(:total_size, 4, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.GetValidatorParticipationRequest do
@@ -644,9 +652,9 @@ defmodule Ethereum.Eth.V1alpha1.GetValidatorParticipationRequest do
 
   defstruct [:query_filter]
 
-  oneof :query_filter, 0
-  field :epoch, 1, type: :uint64, oneof: 0
-  field :genesis, 2, type: :bool, oneof: 0
+  oneof(:query_filter, 0)
+  field(:epoch, 1, type: :uint64, oneof: 0)
+  field(:genesis, 2, type: :bool, oneof: 0)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorParticipationResponse do
@@ -661,9 +669,9 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorParticipationResponse do
 
   defstruct [:epoch, :finalized, :participation]
 
-  field :epoch, 1, type: :uint64
-  field :finalized, 2, type: :bool
-  field :participation, 3, type: Ethereum.Eth.V1alpha1.ValidatorParticipation
+  field(:epoch, 1, type: :uint64)
+  field(:finalized, 2, type: :bool)
+  field(:participation, 3, type: Ethereum.Eth.V1alpha1.ValidatorParticipation)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AttestationPoolRequest do
@@ -677,8 +685,8 @@ defmodule Ethereum.Eth.V1alpha1.AttestationPoolRequest do
 
   defstruct [:page_size, :page_token]
 
-  field :page_size, 1, type: :int32
-  field :page_token, 2, type: :string
+  field(:page_size, 1, type: :int32)
+  field(:page_token, 2, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AttestationPoolResponse do
@@ -693,9 +701,9 @@ defmodule Ethereum.Eth.V1alpha1.AttestationPoolResponse do
 
   defstruct [:attestations, :next_page_token, :total_size]
 
-  field :attestations, 1, repeated: true, type: Ethereum.Eth.V1alpha1.Attestation
-  field :next_page_token, 2, type: :string
-  field :total_size, 3, type: :int32
+  field(:attestations, 1, repeated: true, type: Ethereum.Eth.V1alpha1.Attestation)
+  field(:next_page_token, 2, type: :string)
+  field(:total_size, 3, type: :int32)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconConfig.ConfigEntry do
@@ -709,8 +717,8 @@ defmodule Ethereum.Eth.V1alpha1.BeaconConfig.ConfigEntry do
 
   defstruct [:key, :value]
 
-  field :key, 1, type: :string
-  field :value, 2, type: :string
+  field(:key, 1, type: :string)
+  field(:value, 2, type: :string)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconConfig do
@@ -723,10 +731,11 @@ defmodule Ethereum.Eth.V1alpha1.BeaconConfig do
 
   defstruct [:config]
 
-  field :config, 1,
+  field(:config, 1,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.BeaconConfig.ConfigEntry,
     map: true
+  )
 end
 
 defmodule Ethereum.Eth.V1alpha1.SubmitSlashingResponse do
@@ -739,7 +748,7 @@ defmodule Ethereum.Eth.V1alpha1.SubmitSlashingResponse do
 
   defstruct [:slashed_indices]
 
-  field :slashed_indices, 1, repeated: true, type: :uint64
+  field(:slashed_indices, 1, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.IndividualVotesRequest do
@@ -754,9 +763,9 @@ defmodule Ethereum.Eth.V1alpha1.IndividualVotesRequest do
 
   defstruct [:epoch, :public_keys, :indices]
 
-  field :epoch, 1, type: :uint64
-  field :public_keys, 2, repeated: true, type: :bytes
-  field :indices, 3, repeated: true, type: :uint64
+  field(:epoch, 1, type: :uint64)
+  field(:public_keys, 2, repeated: true, type: :bytes)
+  field(:indices, 3, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.IndividualVotesRespond.IndividualVote do
@@ -799,21 +808,21 @@ defmodule Ethereum.Eth.V1alpha1.IndividualVotesRespond.IndividualVote do
     :inclusion_distance
   ]
 
-  field :epoch, 1, type: :uint64
-  field :public_key, 2, type: :bytes
-  field :validator_index, 3, type: :uint64
-  field :is_slashed, 4, type: :bool
-  field :is_withdrawable_in_current_epoch, 5, type: :bool
-  field :is_active_in_current_epoch, 6, type: :bool
-  field :is_active_in_previous_epoch, 7, type: :bool
-  field :is_current_epoch_attester, 8, type: :bool
-  field :is_current_epoch_target_attester, 9, type: :bool
-  field :is_previous_epoch_attester, 10, type: :bool
-  field :is_previous_epoch_target_attester, 11, type: :bool
-  field :is_previous_epoch_head_attester, 12, type: :bool
-  field :current_epoch_effective_balance_gwei, 13, type: :uint64
-  field :inclusion_slot, 14, type: :uint64
-  field :inclusion_distance, 15, type: :uint64
+  field(:epoch, 1, type: :uint64)
+  field(:public_key, 2, type: :bytes)
+  field(:validator_index, 3, type: :uint64)
+  field(:is_slashed, 4, type: :bool)
+  field(:is_withdrawable_in_current_epoch, 5, type: :bool)
+  field(:is_active_in_current_epoch, 6, type: :bool)
+  field(:is_active_in_previous_epoch, 7, type: :bool)
+  field(:is_current_epoch_attester, 8, type: :bool)
+  field(:is_current_epoch_target_attester, 9, type: :bool)
+  field(:is_previous_epoch_attester, 10, type: :bool)
+  field(:is_previous_epoch_target_attester, 11, type: :bool)
+  field(:is_previous_epoch_head_attester, 12, type: :bool)
+  field(:current_epoch_effective_balance_gwei, 13, type: :uint64)
+  field(:inclusion_slot, 14, type: :uint64)
+  field(:inclusion_distance, 15, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.IndividualVotesRespond do
@@ -826,9 +835,10 @@ defmodule Ethereum.Eth.V1alpha1.IndividualVotesRespond do
 
   defstruct [:individual_votes]
 
-  field :individual_votes, 1,
+  field(:individual_votes, 1,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.IndividualVotesRespond.IndividualVote
+  )
 end
 
 defmodule Ethereum.Eth.V1alpha1.WeakSubjectivityCheckpoint do
@@ -843,96 +853,130 @@ defmodule Ethereum.Eth.V1alpha1.WeakSubjectivityCheckpoint do
 
   defstruct [:block_root, :state_root, :epoch]
 
-  field :block_root, 1, type: :bytes
-  field :state_root, 2, type: :bytes
-  field :epoch, 3, type: :uint64
+  field(:block_root, 1, type: :bytes)
+  field(:state_root, 2, type: :bytes)
+  field(:epoch, 3, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconChain.Service do
   @moduledoc false
   use GRPC.Service, name: "ethereum.eth.v1alpha1.BeaconChain"
 
-  rpc :ListAttestations,
-      Ethereum.Eth.V1alpha1.ListAttestationsRequest,
-      Ethereum.Eth.V1alpha1.ListAttestationsResponse
+  rpc(
+    :ListAttestations,
+    Ethereum.Eth.V1alpha1.ListAttestationsRequest,
+    Ethereum.Eth.V1alpha1.ListAttestationsResponse
+  )
 
-  rpc :ListIndexedAttestations,
-      Ethereum.Eth.V1alpha1.ListIndexedAttestationsRequest,
-      Ethereum.Eth.V1alpha1.ListIndexedAttestationsResponse
+  rpc(
+    :ListIndexedAttestations,
+    Ethereum.Eth.V1alpha1.ListIndexedAttestationsRequest,
+    Ethereum.Eth.V1alpha1.ListIndexedAttestationsResponse
+  )
 
-  rpc :StreamAttestations, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.Attestation)
+  rpc(:StreamAttestations, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.Attestation))
 
-  rpc :StreamIndexedAttestations,
-      Google.Protobuf.Empty,
-      stream(Ethereum.Eth.V1alpha1.IndexedAttestation)
+  rpc(
+    :StreamIndexedAttestations,
+    Google.Protobuf.Empty,
+    stream(Ethereum.Eth.V1alpha1.IndexedAttestation)
+  )
 
-  rpc :AttestationPool,
-      Ethereum.Eth.V1alpha1.AttestationPoolRequest,
-      Ethereum.Eth.V1alpha1.AttestationPoolResponse
+  rpc(
+    :AttestationPool,
+    Ethereum.Eth.V1alpha1.AttestationPoolRequest,
+    Ethereum.Eth.V1alpha1.AttestationPoolResponse
+  )
 
-  rpc :ListBlocks,
-      Ethereum.Eth.V1alpha1.ListBlocksRequest,
-      Ethereum.Eth.V1alpha1.ListBlocksResponse
+  rpc(
+    :ListBlocks,
+    Ethereum.Eth.V1alpha1.ListBlocksRequest,
+    Ethereum.Eth.V1alpha1.ListBlocksResponse
+  )
 
-  rpc :StreamBlocks, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.SignedBeaconBlock)
+  rpc(:StreamBlocks, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.SignedBeaconBlock))
 
-  rpc :StreamChainHead, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.ChainHead)
+  rpc(:StreamChainHead, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.ChainHead))
 
-  rpc :GetChainHead, Google.Protobuf.Empty, Ethereum.Eth.V1alpha1.ChainHead
+  rpc(:GetChainHead, Google.Protobuf.Empty, Ethereum.Eth.V1alpha1.ChainHead)
 
-  rpc :GetWeakSubjectivityCheckpoint,
-      Google.Protobuf.Empty,
-      Ethereum.Eth.V1alpha1.WeakSubjectivityCheckpoint
+  rpc(
+    :GetWeakSubjectivityCheckpoint,
+    Google.Protobuf.Empty,
+    Ethereum.Eth.V1alpha1.WeakSubjectivityCheckpoint
+  )
 
-  rpc :ListBeaconCommittees,
-      Ethereum.Eth.V1alpha1.ListCommitteesRequest,
-      Ethereum.Eth.V1alpha1.BeaconCommittees
+  rpc(
+    :ListBeaconCommittees,
+    Ethereum.Eth.V1alpha1.ListCommitteesRequest,
+    Ethereum.Eth.V1alpha1.BeaconCommittees
+  )
 
-  rpc :ListValidatorBalances,
-      Ethereum.Eth.V1alpha1.ListValidatorBalancesRequest,
-      Ethereum.Eth.V1alpha1.ValidatorBalances
+  rpc(
+    :ListValidatorBalances,
+    Ethereum.Eth.V1alpha1.ListValidatorBalancesRequest,
+    Ethereum.Eth.V1alpha1.ValidatorBalances
+  )
 
-  rpc :ListValidators,
-      Ethereum.Eth.V1alpha1.ListValidatorsRequest,
-      Ethereum.Eth.V1alpha1.Validators
+  rpc(
+    :ListValidators,
+    Ethereum.Eth.V1alpha1.ListValidatorsRequest,
+    Ethereum.Eth.V1alpha1.Validators
+  )
 
-  rpc :GetValidator, Ethereum.Eth.V1alpha1.GetValidatorRequest, Ethereum.Eth.V1alpha1.Validator
+  rpc(:GetValidator, Ethereum.Eth.V1alpha1.GetValidatorRequest, Ethereum.Eth.V1alpha1.Validator)
 
-  rpc :GetValidatorActiveSetChanges,
-      Ethereum.Eth.V1alpha1.GetValidatorActiveSetChangesRequest,
-      Ethereum.Eth.V1alpha1.ActiveSetChanges
+  rpc(
+    :GetValidatorActiveSetChanges,
+    Ethereum.Eth.V1alpha1.GetValidatorActiveSetChangesRequest,
+    Ethereum.Eth.V1alpha1.ActiveSetChanges
+  )
 
-  rpc :GetValidatorQueue, Google.Protobuf.Empty, Ethereum.Eth.V1alpha1.ValidatorQueue
+  rpc(:GetValidatorQueue, Google.Protobuf.Empty, Ethereum.Eth.V1alpha1.ValidatorQueue)
 
-  rpc :GetValidatorPerformance,
-      Ethereum.Eth.V1alpha1.ValidatorPerformanceRequest,
-      Ethereum.Eth.V1alpha1.ValidatorPerformanceResponse
+  rpc(
+    :GetValidatorPerformance,
+    Ethereum.Eth.V1alpha1.ValidatorPerformanceRequest,
+    Ethereum.Eth.V1alpha1.ValidatorPerformanceResponse
+  )
 
-  rpc :ListValidatorAssignments,
-      Ethereum.Eth.V1alpha1.ListValidatorAssignmentsRequest,
-      Ethereum.Eth.V1alpha1.ValidatorAssignments
+  rpc(
+    :ListValidatorAssignments,
+    Ethereum.Eth.V1alpha1.ListValidatorAssignmentsRequest,
+    Ethereum.Eth.V1alpha1.ValidatorAssignments
+  )
 
-  rpc :GetValidatorParticipation,
-      Ethereum.Eth.V1alpha1.GetValidatorParticipationRequest,
-      Ethereum.Eth.V1alpha1.ValidatorParticipationResponse
+  rpc(
+    :GetValidatorParticipation,
+    Ethereum.Eth.V1alpha1.GetValidatorParticipationRequest,
+    Ethereum.Eth.V1alpha1.ValidatorParticipationResponse
+  )
 
-  rpc :GetBeaconConfig, Google.Protobuf.Empty, Ethereum.Eth.V1alpha1.BeaconConfig
+  rpc(:GetBeaconConfig, Google.Protobuf.Empty, Ethereum.Eth.V1alpha1.BeaconConfig)
 
-  rpc :StreamValidatorsInfo,
-      stream(Ethereum.Eth.V1alpha1.ValidatorChangeSet),
-      stream(Ethereum.Eth.V1alpha1.ValidatorInfo)
+  rpc(
+    :StreamValidatorsInfo,
+    stream(Ethereum.Eth.V1alpha1.ValidatorChangeSet),
+    stream(Ethereum.Eth.V1alpha1.ValidatorInfo)
+  )
 
-  rpc :SubmitAttesterSlashing,
-      Ethereum.Eth.V1alpha1.AttesterSlashing,
-      Ethereum.Eth.V1alpha1.SubmitSlashingResponse
+  rpc(
+    :SubmitAttesterSlashing,
+    Ethereum.Eth.V1alpha1.AttesterSlashing,
+    Ethereum.Eth.V1alpha1.SubmitSlashingResponse
+  )
 
-  rpc :SubmitProposerSlashing,
-      Ethereum.Eth.V1alpha1.ProposerSlashing,
-      Ethereum.Eth.V1alpha1.SubmitSlashingResponse
+  rpc(
+    :SubmitProposerSlashing,
+    Ethereum.Eth.V1alpha1.ProposerSlashing,
+    Ethereum.Eth.V1alpha1.SubmitSlashingResponse
+  )
 
-  rpc :GetIndividualVotes,
-      Ethereum.Eth.V1alpha1.IndividualVotesRequest,
-      Ethereum.Eth.V1alpha1.IndividualVotesRespond
+  rpc(
+    :GetIndividualVotes,
+    Ethereum.Eth.V1alpha1.IndividualVotesRequest,
+    Ethereum.Eth.V1alpha1.IndividualVotesRespond
+  )
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconChain.Stub do

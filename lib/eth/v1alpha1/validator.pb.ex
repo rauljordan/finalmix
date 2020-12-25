@@ -14,23 +14,23 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorStatus do
           | :INVALID
           | :PARTIALLY_DEPOSITED
 
-  field :UNKNOWN_STATUS, 0
+  field(:UNKNOWN_STATUS, 0)
 
-  field :DEPOSITED, 1
+  field(:DEPOSITED, 1)
 
-  field :PENDING, 2
+  field(:PENDING, 2)
 
-  field :ACTIVE, 3
+  field(:ACTIVE, 3)
 
-  field :EXITING, 4
+  field(:EXITING, 4)
 
-  field :SLASHING, 5
+  field(:SLASHING, 5)
 
-  field :EXITED, 6
+  field(:EXITED, 6)
 
-  field :INVALID, 7
+  field(:INVALID, 7)
 
-  field :PARTIALLY_DEPOSITED, 8
+  field(:PARTIALLY_DEPOSITED, 8)
 end
 
 defmodule Ethereum.Eth.V1alpha1.DomainRequest do
@@ -44,8 +44,8 @@ defmodule Ethereum.Eth.V1alpha1.DomainRequest do
 
   defstruct [:epoch, :domain]
 
-  field :epoch, 1, type: :uint64
-  field :domain, 2, type: :bytes
+  field(:epoch, 1, type: :uint64)
+  field(:domain, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.DomainResponse do
@@ -58,7 +58,7 @@ defmodule Ethereum.Eth.V1alpha1.DomainResponse do
 
   defstruct [:signature_domain]
 
-  field :signature_domain, 1, type: :bytes
+  field(:signature_domain, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorActivationRequest do
@@ -71,7 +71,7 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorActivationRequest do
 
   defstruct [:public_keys]
 
-  field :public_keys, 1, repeated: true, type: :bytes
+  field(:public_keys, 1, repeated: true, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorActivationResponse.Status do
@@ -86,9 +86,9 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorActivationResponse.Status do
 
   defstruct [:public_key, :status, :index]
 
-  field :public_key, 1, type: :bytes
-  field :status, 2, type: Ethereum.Eth.V1alpha1.ValidatorStatusResponse
-  field :index, 3, type: :uint64
+  field(:public_key, 1, type: :bytes)
+  field(:status, 2, type: Ethereum.Eth.V1alpha1.ValidatorStatusResponse)
+  field(:index, 3, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorActivationResponse do
@@ -101,9 +101,10 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorActivationResponse do
 
   defstruct [:statuses]
 
-  field :statuses, 1,
+  field(:statuses, 1,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.ValidatorActivationResponse.Status
+  )
 end
 
 defmodule Ethereum.Eth.V1alpha1.ChainStartResponse do
@@ -118,9 +119,9 @@ defmodule Ethereum.Eth.V1alpha1.ChainStartResponse do
 
   defstruct [:started, :genesis_time, :genesis_validators_root]
 
-  field :started, 1, type: :bool
-  field :genesis_time, 2, type: :uint64
-  field :genesis_validators_root, 3, type: :bytes
+  field(:started, 1, type: :bool)
+  field(:genesis_time, 2, type: :uint64)
+  field(:genesis_validators_root, 3, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.SyncedResponse do
@@ -134,8 +135,8 @@ defmodule Ethereum.Eth.V1alpha1.SyncedResponse do
 
   defstruct [:synced, :genesis_time]
 
-  field :synced, 1, type: :bool
-  field :genesis_time, 2, type: :uint64
+  field(:synced, 1, type: :bool)
+  field(:genesis_time, 2, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorIndexRequest do
@@ -148,7 +149,7 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorIndexRequest do
 
   defstruct [:public_key]
 
-  field :public_key, 1, type: :bytes
+  field(:public_key, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorIndexResponse do
@@ -161,7 +162,7 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorIndexResponse do
 
   defstruct [:index]
 
-  field :index, 1, type: :uint64
+  field(:index, 1, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorStatusRequest do
@@ -174,7 +175,7 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorStatusRequest do
 
   defstruct [:public_key]
 
-  field :public_key, 1, type: :bytes
+  field(:public_key, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorStatusResponse do
@@ -197,11 +198,11 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorStatusResponse do
     :position_in_activation_queue
   ]
 
-  field :status, 1, type: Ethereum.Eth.V1alpha1.ValidatorStatus, enum: true
-  field :eth1_deposit_block_number, 2, type: :uint64
-  field :deposit_inclusion_slot, 3, type: :uint64
-  field :activation_epoch, 4, type: :uint64
-  field :position_in_activation_queue, 5, type: :uint64
+  field(:status, 1, type: Ethereum.Eth.V1alpha1.ValidatorStatus, enum: true)
+  field(:eth1_deposit_block_number, 2, type: :uint64)
+  field(:deposit_inclusion_slot, 3, type: :uint64)
+  field(:activation_epoch, 4, type: :uint64)
+  field(:position_in_activation_queue, 5, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.MultipleValidatorStatusRequest do
@@ -215,8 +216,8 @@ defmodule Ethereum.Eth.V1alpha1.MultipleValidatorStatusRequest do
 
   defstruct [:public_keys, :indices]
 
-  field :public_keys, 1, repeated: true, type: :bytes
-  field :indices, 2, repeated: true, type: :int64
+  field(:public_keys, 1, repeated: true, type: :bytes)
+  field(:indices, 2, repeated: true, type: :int64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.MultipleValidatorStatusResponse do
@@ -231,9 +232,9 @@ defmodule Ethereum.Eth.V1alpha1.MultipleValidatorStatusResponse do
 
   defstruct [:public_keys, :statuses, :indices]
 
-  field :public_keys, 1, repeated: true, type: :bytes
-  field :statuses, 2, repeated: true, type: Ethereum.Eth.V1alpha1.ValidatorStatusResponse
-  field :indices, 3, repeated: true, type: :uint64
+  field(:public_keys, 1, repeated: true, type: :bytes)
+  field(:statuses, 2, repeated: true, type: Ethereum.Eth.V1alpha1.ValidatorStatusResponse)
+  field(:indices, 3, repeated: true, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.DutiesRequest do
@@ -247,8 +248,8 @@ defmodule Ethereum.Eth.V1alpha1.DutiesRequest do
 
   defstruct [:epoch, :public_keys]
 
-  field :epoch, 1, type: :uint64
-  field :public_keys, 2, repeated: true, type: :bytes
+  field(:epoch, 1, type: :uint64)
+  field(:public_keys, 2, repeated: true, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.DutiesResponse.Duty do
@@ -275,13 +276,13 @@ defmodule Ethereum.Eth.V1alpha1.DutiesResponse.Duty do
     :validator_index
   ]
 
-  field :committee, 1, repeated: true, type: :uint64
-  field :committee_index, 2, type: :uint64
-  field :attester_slot, 3, type: :uint64
-  field :proposer_slots, 4, repeated: true, type: :uint64
-  field :public_key, 5, type: :bytes
-  field :status, 6, type: Ethereum.Eth.V1alpha1.ValidatorStatus, enum: true
-  field :validator_index, 7, type: :uint64
+  field(:committee, 1, repeated: true, type: :uint64)
+  field(:committee_index, 2, type: :uint64)
+  field(:attester_slot, 3, type: :uint64)
+  field(:proposer_slots, 4, repeated: true, type: :uint64)
+  field(:public_key, 5, type: :bytes)
+  field(:status, 6, type: Ethereum.Eth.V1alpha1.ValidatorStatus, enum: true)
+  field(:validator_index, 7, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.DutiesResponse do
@@ -296,13 +297,14 @@ defmodule Ethereum.Eth.V1alpha1.DutiesResponse do
 
   defstruct [:duties, :current_epoch_duties, :next_epoch_duties]
 
-  field :duties, 1,
+  field(:duties, 1,
     repeated: true,
     type: Ethereum.Eth.V1alpha1.DutiesResponse.Duty,
     deprecated: true
+  )
 
-  field :current_epoch_duties, 2, repeated: true, type: Ethereum.Eth.V1alpha1.DutiesResponse.Duty
-  field :next_epoch_duties, 3, repeated: true, type: Ethereum.Eth.V1alpha1.DutiesResponse.Duty
+  field(:current_epoch_duties, 2, repeated: true, type: Ethereum.Eth.V1alpha1.DutiesResponse.Duty)
+  field(:next_epoch_duties, 3, repeated: true, type: Ethereum.Eth.V1alpha1.DutiesResponse.Duty)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BlockRequest do
@@ -317,9 +319,9 @@ defmodule Ethereum.Eth.V1alpha1.BlockRequest do
 
   defstruct [:slot, :randao_reveal, :graffiti]
 
-  field :slot, 1, type: :uint64
-  field :randao_reveal, 2, type: :bytes
-  field :graffiti, 3, type: :bytes
+  field(:slot, 1, type: :uint64)
+  field(:randao_reveal, 2, type: :bytes)
+  field(:graffiti, 3, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ProposeResponse do
@@ -332,7 +334,7 @@ defmodule Ethereum.Eth.V1alpha1.ProposeResponse do
 
   defstruct [:block_root]
 
-  field :block_root, 1, type: :bytes
+  field(:block_root, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ProposeExitResponse do
@@ -345,7 +347,7 @@ defmodule Ethereum.Eth.V1alpha1.ProposeExitResponse do
 
   defstruct [:exit_root]
 
-  field :exit_root, 1, type: :bytes
+  field(:exit_root, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AttestationDataRequest do
@@ -359,8 +361,8 @@ defmodule Ethereum.Eth.V1alpha1.AttestationDataRequest do
 
   defstruct [:slot, :committee_index]
 
-  field :slot, 1, type: :uint64
-  field :committee_index, 2, type: :uint64
+  field(:slot, 1, type: :uint64)
+  field(:committee_index, 2, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AttestResponse do
@@ -373,7 +375,7 @@ defmodule Ethereum.Eth.V1alpha1.AttestResponse do
 
   defstruct [:attestation_data_root]
 
-  field :attestation_data_root, 1, type: :bytes
+  field(:attestation_data_root, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AggregateSelectionRequest do
@@ -389,10 +391,10 @@ defmodule Ethereum.Eth.V1alpha1.AggregateSelectionRequest do
 
   defstruct [:slot, :committee_index, :public_key, :slot_signature]
 
-  field :slot, 1, type: :uint64
-  field :committee_index, 2, type: :uint64
-  field :public_key, 3, type: :bytes
-  field :slot_signature, 4, type: :bytes
+  field(:slot, 1, type: :uint64)
+  field(:committee_index, 2, type: :uint64)
+  field(:public_key, 3, type: :bytes)
+  field(:slot_signature, 4, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AggregateSelectionResponse do
@@ -405,7 +407,7 @@ defmodule Ethereum.Eth.V1alpha1.AggregateSelectionResponse do
 
   defstruct [:aggregate_and_proof]
 
-  field :aggregate_and_proof, 1, type: Ethereum.Eth.V1alpha1.AggregateAttestationAndProof
+  field(:aggregate_and_proof, 1, type: Ethereum.Eth.V1alpha1.AggregateAttestationAndProof)
 end
 
 defmodule Ethereum.Eth.V1alpha1.SignedAggregateSubmitRequest do
@@ -419,8 +421,9 @@ defmodule Ethereum.Eth.V1alpha1.SignedAggregateSubmitRequest do
 
   defstruct [:signed_aggregate_and_proof]
 
-  field :signed_aggregate_and_proof, 1,
+  field(:signed_aggregate_and_proof, 1,
     type: Ethereum.Eth.V1alpha1.SignedAggregateAttestationAndProof
+  )
 end
 
 defmodule Ethereum.Eth.V1alpha1.SignedAggregateSubmitResponse do
@@ -433,7 +436,7 @@ defmodule Ethereum.Eth.V1alpha1.SignedAggregateSubmitResponse do
 
   defstruct [:attestation_data_root]
 
-  field :attestation_data_root, 1, type: :bytes
+  field(:attestation_data_root, 1, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.CommitteeSubnetsSubscribeRequest do
@@ -448,9 +451,9 @@ defmodule Ethereum.Eth.V1alpha1.CommitteeSubnetsSubscribeRequest do
 
   defstruct [:slots, :committee_ids, :is_aggregator]
 
-  field :slots, 1, repeated: true, type: :uint64
-  field :committee_ids, 2, repeated: true, type: :uint64
-  field :is_aggregator, 3, repeated: true, type: :bool
+  field(:slots, 1, repeated: true, type: :uint64)
+  field(:committee_ids, 2, repeated: true, type: :uint64)
+  field(:is_aggregator, 3, repeated: true, type: :bool)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Validator do
@@ -479,14 +482,14 @@ defmodule Ethereum.Eth.V1alpha1.Validator do
     :withdrawable_epoch
   ]
 
-  field :public_key, 1, type: :bytes
-  field :withdrawal_credentials, 2, type: :bytes
-  field :effective_balance, 3, type: :uint64
-  field :slashed, 4, type: :bool
-  field :activation_eligibility_epoch, 5, type: :uint64
-  field :activation_epoch, 6, type: :uint64
-  field :exit_epoch, 7, type: :uint64
-  field :withdrawable_epoch, 8, type: :uint64
+  field(:public_key, 1, type: :bytes)
+  field(:withdrawal_credentials, 2, type: :bytes)
+  field(:effective_balance, 3, type: :uint64)
+  field(:slashed, 4, type: :bool)
+  field(:activation_eligibility_epoch, 5, type: :uint64)
+  field(:activation_epoch, 6, type: :uint64)
+  field(:exit_epoch, 7, type: :uint64)
+  field(:withdrawable_epoch, 8, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorParticipation do
@@ -519,16 +522,16 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorParticipation do
     :previous_epoch_head_attesting_gwei
   ]
 
-  field :global_participation_rate, 1, type: :float, deprecated: true
-  field :voted_ether, 2, type: :uint64, deprecated: true
-  field :eligible_ether, 3, type: :uint64, deprecated: true
-  field :current_epoch_active_gwei, 4, type: :uint64
-  field :current_epoch_attesting_gwei, 5, type: :uint64
-  field :current_epoch_target_attesting_gwei, 6, type: :uint64
-  field :previous_epoch_active_gwei, 7, type: :uint64
-  field :previous_epoch_attesting_gwei, 8, type: :uint64
-  field :previous_epoch_target_attesting_gwei, 9, type: :uint64
-  field :previous_epoch_head_attesting_gwei, 10, type: :uint64
+  field(:global_participation_rate, 1, type: :float, deprecated: true)
+  field(:voted_ether, 2, type: :uint64, deprecated: true)
+  field(:eligible_ether, 3, type: :uint64, deprecated: true)
+  field(:current_epoch_active_gwei, 4, type: :uint64)
+  field(:current_epoch_attesting_gwei, 5, type: :uint64)
+  field(:current_epoch_target_attesting_gwei, 6, type: :uint64)
+  field(:previous_epoch_active_gwei, 7, type: :uint64)
+  field(:previous_epoch_attesting_gwei, 8, type: :uint64)
+  field(:previous_epoch_target_attesting_gwei, 9, type: :uint64)
+  field(:previous_epoch_head_attesting_gwei, 10, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ValidatorInfo do
@@ -555,72 +558,98 @@ defmodule Ethereum.Eth.V1alpha1.ValidatorInfo do
     :effective_balance
   ]
 
-  field :public_key, 1, type: :bytes
-  field :index, 2, type: :uint64
-  field :epoch, 3, type: :uint64
-  field :status, 4, type: Ethereum.Eth.V1alpha1.ValidatorStatus, enum: true
-  field :transition_timestamp, 5, type: :uint64
-  field :balance, 6, type: :uint64
-  field :effective_balance, 7, type: :uint64
+  field(:public_key, 1, type: :bytes)
+  field(:index, 2, type: :uint64)
+  field(:epoch, 3, type: :uint64)
+  field(:status, 4, type: Ethereum.Eth.V1alpha1.ValidatorStatus, enum: true)
+  field(:transition_timestamp, 5, type: :uint64)
+  field(:balance, 6, type: :uint64)
+  field(:effective_balance, 7, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconNodeValidator.Service do
   @moduledoc false
   use GRPC.Service, name: "ethereum.eth.v1alpha1.BeaconNodeValidator"
 
-  rpc :GetDuties, Ethereum.Eth.V1alpha1.DutiesRequest, Ethereum.Eth.V1alpha1.DutiesResponse
+  rpc(:GetDuties, Ethereum.Eth.V1alpha1.DutiesRequest, Ethereum.Eth.V1alpha1.DutiesResponse)
 
-  rpc :StreamDuties,
-      Ethereum.Eth.V1alpha1.DutiesRequest,
-      stream(Ethereum.Eth.V1alpha1.DutiesResponse)
+  rpc(
+    :StreamDuties,
+    Ethereum.Eth.V1alpha1.DutiesRequest,
+    stream(Ethereum.Eth.V1alpha1.DutiesResponse)
+  )
 
-  rpc :DomainData, Ethereum.Eth.V1alpha1.DomainRequest, Ethereum.Eth.V1alpha1.DomainResponse
+  rpc(:DomainData, Ethereum.Eth.V1alpha1.DomainRequest, Ethereum.Eth.V1alpha1.DomainResponse)
 
-  rpc :WaitForChainStart, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.ChainStartResponse)
+  rpc(:WaitForChainStart, Google.Protobuf.Empty, stream(Ethereum.Eth.V1alpha1.ChainStartResponse))
 
-  rpc :WaitForActivation,
-      Ethereum.Eth.V1alpha1.ValidatorActivationRequest,
-      stream(Ethereum.Eth.V1alpha1.ValidatorActivationResponse)
+  rpc(
+    :WaitForActivation,
+    Ethereum.Eth.V1alpha1.ValidatorActivationRequest,
+    stream(Ethereum.Eth.V1alpha1.ValidatorActivationResponse)
+  )
 
-  rpc :ValidatorIndex,
-      Ethereum.Eth.V1alpha1.ValidatorIndexRequest,
-      Ethereum.Eth.V1alpha1.ValidatorIndexResponse
+  rpc(
+    :ValidatorIndex,
+    Ethereum.Eth.V1alpha1.ValidatorIndexRequest,
+    Ethereum.Eth.V1alpha1.ValidatorIndexResponse
+  )
 
-  rpc :ValidatorStatus,
-      Ethereum.Eth.V1alpha1.ValidatorStatusRequest,
-      Ethereum.Eth.V1alpha1.ValidatorStatusResponse
+  rpc(
+    :ValidatorStatus,
+    Ethereum.Eth.V1alpha1.ValidatorStatusRequest,
+    Ethereum.Eth.V1alpha1.ValidatorStatusResponse
+  )
 
-  rpc :MultipleValidatorStatus,
-      Ethereum.Eth.V1alpha1.MultipleValidatorStatusRequest,
-      Ethereum.Eth.V1alpha1.MultipleValidatorStatusResponse
+  rpc(
+    :MultipleValidatorStatus,
+    Ethereum.Eth.V1alpha1.MultipleValidatorStatusRequest,
+    Ethereum.Eth.V1alpha1.MultipleValidatorStatusResponse
+  )
 
-  rpc :GetBlock, Ethereum.Eth.V1alpha1.BlockRequest, Ethereum.Eth.V1alpha1.BeaconBlock
+  rpc(:GetBlock, Ethereum.Eth.V1alpha1.BlockRequest, Ethereum.Eth.V1alpha1.BeaconBlock)
 
-  rpc :ProposeBlock,
-      Ethereum.Eth.V1alpha1.SignedBeaconBlock,
-      Ethereum.Eth.V1alpha1.ProposeResponse
+  rpc(
+    :ProposeBlock,
+    Ethereum.Eth.V1alpha1.SignedBeaconBlock,
+    Ethereum.Eth.V1alpha1.ProposeResponse
+  )
 
-  rpc :GetAttestationData,
-      Ethereum.Eth.V1alpha1.AttestationDataRequest,
-      Ethereum.Eth.V1alpha1.AttestationData
+  rpc(
+    :GetAttestationData,
+    Ethereum.Eth.V1alpha1.AttestationDataRequest,
+    Ethereum.Eth.V1alpha1.AttestationData
+  )
 
-  rpc :ProposeAttestation, Ethereum.Eth.V1alpha1.Attestation, Ethereum.Eth.V1alpha1.AttestResponse
+  rpc(
+    :ProposeAttestation,
+    Ethereum.Eth.V1alpha1.Attestation,
+    Ethereum.Eth.V1alpha1.AttestResponse
+  )
 
-  rpc :SubmitAggregateSelectionProof,
-      Ethereum.Eth.V1alpha1.AggregateSelectionRequest,
-      Ethereum.Eth.V1alpha1.AggregateSelectionResponse
+  rpc(
+    :SubmitAggregateSelectionProof,
+    Ethereum.Eth.V1alpha1.AggregateSelectionRequest,
+    Ethereum.Eth.V1alpha1.AggregateSelectionResponse
+  )
 
-  rpc :SubmitSignedAggregateSelectionProof,
-      Ethereum.Eth.V1alpha1.SignedAggregateSubmitRequest,
-      Ethereum.Eth.V1alpha1.SignedAggregateSubmitResponse
+  rpc(
+    :SubmitSignedAggregateSelectionProof,
+    Ethereum.Eth.V1alpha1.SignedAggregateSubmitRequest,
+    Ethereum.Eth.V1alpha1.SignedAggregateSubmitResponse
+  )
 
-  rpc :ProposeExit,
-      Ethereum.Eth.V1alpha1.SignedVoluntaryExit,
-      Ethereum.Eth.V1alpha1.ProposeExitResponse
+  rpc(
+    :ProposeExit,
+    Ethereum.Eth.V1alpha1.SignedVoluntaryExit,
+    Ethereum.Eth.V1alpha1.ProposeExitResponse
+  )
 
-  rpc :SubscribeCommitteeSubnets,
-      Ethereum.Eth.V1alpha1.CommitteeSubnetsSubscribeRequest,
-      Google.Protobuf.Empty
+  rpc(
+    :SubscribeCommitteeSubnets,
+    Ethereum.Eth.V1alpha1.CommitteeSubnetsSubscribeRequest,
+    Google.Protobuf.Empty
+  )
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconNodeValidator.Stub do

@@ -12,11 +12,11 @@ defmodule Ethereum.Eth.V1alpha1.BeaconBlock do
 
   defstruct [:slot, :proposer_index, :parent_root, :state_root, :body]
 
-  field :slot, 1, type: :uint64
-  field :proposer_index, 2, type: :uint64
-  field :parent_root, 3, type: :bytes
-  field :state_root, 4, type: :bytes
-  field :body, 5, type: Ethereum.Eth.V1alpha1.BeaconBlockBody
+  field(:slot, 1, type: :uint64)
+  field(:proposer_index, 2, type: :uint64)
+  field(:parent_root, 3, type: :bytes)
+  field(:state_root, 4, type: :bytes)
+  field(:body, 5, type: Ethereum.Eth.V1alpha1.BeaconBlockBody)
 end
 
 defmodule Ethereum.Eth.V1alpha1.SignedBeaconBlock do
@@ -30,8 +30,8 @@ defmodule Ethereum.Eth.V1alpha1.SignedBeaconBlock do
 
   defstruct [:block, :signature]
 
-  field :block, 1, type: Ethereum.Eth.V1alpha1.BeaconBlock
-  field :signature, 2, type: :bytes
+  field(:block, 1, type: Ethereum.Eth.V1alpha1.BeaconBlock)
+  field(:signature, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconBlockBody do
@@ -60,14 +60,14 @@ defmodule Ethereum.Eth.V1alpha1.BeaconBlockBody do
     :voluntary_exits
   ]
 
-  field :randao_reveal, 1, type: :bytes
-  field :eth1_data, 2, type: Ethereum.Eth.V1alpha1.Eth1Data
-  field :graffiti, 3, type: :bytes
-  field :proposer_slashings, 4, repeated: true, type: Ethereum.Eth.V1alpha1.ProposerSlashing
-  field :attester_slashings, 5, repeated: true, type: Ethereum.Eth.V1alpha1.AttesterSlashing
-  field :attestations, 6, repeated: true, type: Ethereum.Eth.V1alpha1.Attestation
-  field :deposits, 7, repeated: true, type: Ethereum.Eth.V1alpha1.Deposit
-  field :voluntary_exits, 8, repeated: true, type: Ethereum.Eth.V1alpha1.SignedVoluntaryExit
+  field(:randao_reveal, 1, type: :bytes)
+  field(:eth1_data, 2, type: Ethereum.Eth.V1alpha1.Eth1Data)
+  field(:graffiti, 3, type: :bytes)
+  field(:proposer_slashings, 4, repeated: true, type: Ethereum.Eth.V1alpha1.ProposerSlashing)
+  field(:attester_slashings, 5, repeated: true, type: Ethereum.Eth.V1alpha1.AttesterSlashing)
+  field(:attestations, 6, repeated: true, type: Ethereum.Eth.V1alpha1.Attestation)
+  field(:deposits, 7, repeated: true, type: Ethereum.Eth.V1alpha1.Deposit)
+  field(:voluntary_exits, 8, repeated: true, type: Ethereum.Eth.V1alpha1.SignedVoluntaryExit)
 end
 
 defmodule Ethereum.Eth.V1alpha1.ProposerSlashing do
@@ -81,8 +81,8 @@ defmodule Ethereum.Eth.V1alpha1.ProposerSlashing do
 
   defstruct [:header_1, :header_2]
 
-  field :header_1, 2, type: Ethereum.Eth.V1alpha1.SignedBeaconBlockHeader
-  field :header_2, 3, type: Ethereum.Eth.V1alpha1.SignedBeaconBlockHeader
+  field(:header_1, 2, type: Ethereum.Eth.V1alpha1.SignedBeaconBlockHeader)
+  field(:header_2, 3, type: Ethereum.Eth.V1alpha1.SignedBeaconBlockHeader)
 end
 
 defmodule Ethereum.Eth.V1alpha1.AttesterSlashing do
@@ -96,8 +96,8 @@ defmodule Ethereum.Eth.V1alpha1.AttesterSlashing do
 
   defstruct [:attestation_1, :attestation_2]
 
-  field :attestation_1, 1, type: Ethereum.Eth.V1alpha1.IndexedAttestation
-  field :attestation_2, 2, type: Ethereum.Eth.V1alpha1.IndexedAttestation
+  field(:attestation_1, 1, type: Ethereum.Eth.V1alpha1.IndexedAttestation)
+  field(:attestation_2, 2, type: Ethereum.Eth.V1alpha1.IndexedAttestation)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Deposit.Data do
@@ -113,10 +113,10 @@ defmodule Ethereum.Eth.V1alpha1.Deposit.Data do
 
   defstruct [:public_key, :withdrawal_credentials, :amount, :signature]
 
-  field :public_key, 1, type: :bytes
-  field :withdrawal_credentials, 2, type: :bytes
-  field :amount, 3, type: :uint64
-  field :signature, 4, type: :bytes
+  field(:public_key, 1, type: :bytes)
+  field(:withdrawal_credentials, 2, type: :bytes)
+  field(:amount, 3, type: :uint64)
+  field(:signature, 4, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Deposit do
@@ -130,8 +130,8 @@ defmodule Ethereum.Eth.V1alpha1.Deposit do
 
   defstruct [:proof, :data]
 
-  field :proof, 1, repeated: true, type: :bytes
-  field :data, 2, type: Ethereum.Eth.V1alpha1.Deposit.Data
+  field(:proof, 1, repeated: true, type: :bytes)
+  field(:data, 2, type: Ethereum.Eth.V1alpha1.Deposit.Data)
 end
 
 defmodule Ethereum.Eth.V1alpha1.VoluntaryExit do
@@ -145,8 +145,8 @@ defmodule Ethereum.Eth.V1alpha1.VoluntaryExit do
 
   defstruct [:epoch, :validator_index]
 
-  field :epoch, 1, type: :uint64
-  field :validator_index, 2, type: :uint64
+  field(:epoch, 1, type: :uint64)
+  field(:validator_index, 2, type: :uint64)
 end
 
 defmodule Ethereum.Eth.V1alpha1.SignedVoluntaryExit do
@@ -160,8 +160,8 @@ defmodule Ethereum.Eth.V1alpha1.SignedVoluntaryExit do
 
   defstruct [:exit, :signature]
 
-  field :exit, 1, type: Ethereum.Eth.V1alpha1.VoluntaryExit
-  field :signature, 2, type: :bytes
+  field(:exit, 1, type: Ethereum.Eth.V1alpha1.VoluntaryExit)
+  field(:signature, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.Eth1Data do
@@ -176,9 +176,9 @@ defmodule Ethereum.Eth.V1alpha1.Eth1Data do
 
   defstruct [:deposit_root, :deposit_count, :block_hash]
 
-  field :deposit_root, 1, type: :bytes
-  field :deposit_count, 2, type: :uint64
-  field :block_hash, 3, type: :bytes
+  field(:deposit_root, 1, type: :bytes)
+  field(:deposit_count, 2, type: :uint64)
+  field(:block_hash, 3, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.BeaconBlockHeader do
@@ -195,11 +195,11 @@ defmodule Ethereum.Eth.V1alpha1.BeaconBlockHeader do
 
   defstruct [:slot, :proposer_index, :parent_root, :state_root, :body_root]
 
-  field :slot, 1, type: :uint64
-  field :proposer_index, 2, type: :uint64
-  field :parent_root, 3, type: :bytes
-  field :state_root, 4, type: :bytes
-  field :body_root, 5, type: :bytes
+  field(:slot, 1, type: :uint64)
+  field(:proposer_index, 2, type: :uint64)
+  field(:parent_root, 3, type: :bytes)
+  field(:state_root, 4, type: :bytes)
+  field(:body_root, 5, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.SignedBeaconBlockHeader do
@@ -213,8 +213,8 @@ defmodule Ethereum.Eth.V1alpha1.SignedBeaconBlockHeader do
 
   defstruct [:header, :signature]
 
-  field :header, 1, type: Ethereum.Eth.V1alpha1.BeaconBlockHeader
-  field :signature, 2, type: :bytes
+  field(:header, 1, type: Ethereum.Eth.V1alpha1.BeaconBlockHeader)
+  field(:signature, 2, type: :bytes)
 end
 
 defmodule Ethereum.Eth.V1alpha1.IndexedAttestation do
@@ -229,7 +229,7 @@ defmodule Ethereum.Eth.V1alpha1.IndexedAttestation do
 
   defstruct [:attesting_indices, :data, :signature]
 
-  field :attesting_indices, 1, repeated: true, type: :uint64
-  field :data, 2, type: Ethereum.Eth.V1alpha1.AttestationData
-  field :signature, 3, type: :bytes
+  field(:attesting_indices, 1, repeated: true, type: :uint64)
+  field(:data, 2, type: Ethereum.Eth.V1alpha1.AttestationData)
+  field(:signature, 3, type: :bytes)
 end
