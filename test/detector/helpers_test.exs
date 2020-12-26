@@ -21,14 +21,12 @@ defmodule FinalMixTest.Detector.Helpers do
       att1 = IndexedAttestation.new(attesting_indices: [0])
       att2 = IndexedAttestation.new(attesting_indices: [1])
       att3 = IndexedAttestation.new(attesting_indices: [2])
-      att4 = IndexedAttestation.new(attesting_indices: [16])
 
       wanted = %{
-        0 => [att3, att2, att1],
-        1 => [att4]
+        0 => [att3, att2, att1]
       }
 
-      assert Helpers.group_by_validator_index([att1, att2, att3, att4]) == wanted
+      assert Helpers.group_by_validator_index([att1, att2, att3]) == wanted
     end
 
     test "advanced properly groups multiple attestations" do
@@ -44,7 +42,11 @@ defmodule FinalMixTest.Detector.Helpers do
         1 => [att5, att6]
       }
 
-      assert Helpers.advanced_group_by_validator_index([att1, att2, att3, att4, att5, att6]) == wanted
+      assert Helpers.advanced_group_by_validator_index([att1, att2, att3, att4, att5, att6]) ==
+               wanted
     end
+  end
+
+  describe "group by chunk index" do
   end
 end

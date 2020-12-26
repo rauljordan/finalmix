@@ -69,12 +69,16 @@ defmodule FinalMix.Detector.Helpers do
   # a field from the attestation, then we transform the field
   # and group attestations into lists for each of those fields
   defp group_attestations_by(atts, select_field, transform_field) do
-    pairs = Enum.flat_map atts, fn att ->
-      Enum.map(select_field.(att), &{&1, att})
-    end
-    transformed_pairs = Enum.map pairs, fn {key, val} ->
-      {transform_field.(key), val}
-    end
-    Enum.group_by transformed_pairs, fn {key, _} -> key end, fn {_, val} -> val end
+    pairs =
+      Enum.flat_map(atts, fn att ->
+        Enum.map(select_field.(att), &{&1, att})
+      end)
+
+    transformed_pairs =
+      Enum.map(pairs, fn {key, val} ->
+        {transform_field.(key), val}
+      end)
+
+    Enum.group_by(transformed_pairs, fn {key, _} -> key end, fn {_, val} -> val end)
   end
 end
