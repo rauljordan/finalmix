@@ -10,7 +10,7 @@ defmodule FinalMix.Supervisor do
     children = [
       {FinalMix.DB, name: FinalMix.DB},
       {FinalMix.BeaconClient, name: FinalMix.BeaconClient},
-      {FinalMix.Chunker, name: FinalMix.Chunker}
+      {FinalMix.Detector, name: FinalMix.Detector}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

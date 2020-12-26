@@ -1,6 +1,8 @@
 defmodule FinalMix.Detector do
   use GenServer
   require Logger
+  alias FinalMix.Detector.Config
+  alias FinalMix.Detector.Helpers
 
   @name __MODULE__
 
@@ -9,8 +11,8 @@ defmodule FinalMix.Detector do
     GenServer.start_link(@name, [], name: @name)
   end
 
-  def process_attestation(attestation) do
-    GenServer.cast(@name, {:process_attestation, attestation})
+  def enqueue_attestation(attestation) do
+    GenServer.cast(@name, {:enqueue_attestation, attestation})
   end
 
   # Server methods
@@ -21,21 +23,41 @@ defmodule FinalMix.Detector do
   end
 
   @impl true
-  def handle_cast({:process_attestation, attestation}, queue) do
-    Logger.info("Processing attestation")
+  def handle_cast({:enqueue_attestation, attestation}, queue) do
     {:noreply, [attestation | queue]}
   end
 
   @impl true
   def handle_info(:process_queued, queue) do
-    IO.puts(queue.size())
-    # Reschedule once more
+    process_queued_attestations(queue)
     schedule_queue_processing()
-    {:noreply, queue}
+    {:noreply, []}
+  end
+
+  defp process_queued_attestations(attestations) do
+    Logger.info("Processing #{Enum.count(attestations)} attestations from queue")
+
+    batches =
+      attestations
+      |> Helpers.group_by_validator_index()
+
+    Logger.info("Updating spans for #{Enum.count(batches)} batches of grouped attestations")
+
+    Enum.each(batches, fn {_, atts} ->
+      atts_by_chunk_idx =
+        atts
+        |> Helpers.group_by_chunk_index()
+
+      update_max_spans(atts_by_chunk_idx)
+    end)
+  end
+
+  defp update_max_spans(_atts_by_chunk_idx) do
+    nil
   end
 
   defp schedule_queue_processing() do
     # Every 5 seconds
-    Process.send_after(self(), :process_queued, 5000)
+    Process.send_after(self(), :process_queued, Config.update_interval_seconds() * 1000)
   end
 end
