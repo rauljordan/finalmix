@@ -24,7 +24,8 @@ defmodule FinalMix.MixProject do
     [
       {:grpc, github: "elixir-grpc/grpc"},
       {:cubdb, "~> 0.17.0"},
-      {:cowlib, "~> 2.9.0", override: true}
+      {:cowlib, "~> 2.9.0", override: true},
+      {:benchee, "~> 1.0", only: :dev}
     ]
   end
 end

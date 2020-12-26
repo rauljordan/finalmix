@@ -39,24 +39,35 @@ defmodule FinalMix.Detector do
 
     batches =
       attestations
-      |> Helpers.group_by_validator_index()
+      |> Helpers.group_by_validator_chunk_index()
 
     Logger.info("Updating spans for #{Enum.count(batches)} batches of grouped attestations")
 
     Enum.each batches, fn {_, atts} ->
       atts_by_chunk_idx =
         atts
-        |> Helpers.group_by_chunk_index()
+        |> Helpers.group_by_chunk_index
       update_arrays(atts_by_chunk_idx)
     end
+
     Logger.info("Finished updating arrays for #{Enum.count(batches)} batches")
   end
 
-  defp update_arrays(atts_by_chunk_idx) do
-    updated_chunks = Map.new()
-    Enum.reduce atts_by_chunk_idx, updated_chunks, fn ({_chunk_idx, _atts}, acc) ->
-      acc
+  defp update_arrays(atts_by_chunk) do
+    chunks = Map.new()
+    Enum.reduce atts_by_chunk, chunks, fn ({chunk_idx, atts}, map) ->
+      Enum.reduce atts, map, fn (att, acc) ->
+        att.attesting_indices
+        |> Enum.filter(fn idx -> idx == Config.validator_chunk_index(idx) end)
+        |> Enum.reduce(acc, fn (validator_idx, acc2) ->
+          apply_attestation_for_validator(acc2, chunk_idx, validator_idx, att)
+        end)
+      end
     end
+  end
+
+  def apply_attestation_for_validator(map, validator_chunk_idx, validator_idx, att) do
+    map
   end
 
   defp schedule_queue_processing() do
