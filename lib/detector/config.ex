@@ -11,6 +11,10 @@ defmodule FinalMix.Detector.Config do
     |> Integer.floor_div(chunk_size())
   end
 
+  def start_epoch_from_chunk_index(chunk_index) do
+    chunk_index * chunk_size()
+  end
+
   def validator_chunk_index(validator_index) do
     validator_index
     |> Integer.floor_div(chunk_size())

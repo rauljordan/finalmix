@@ -1,6 +1,7 @@
 defmodule FinalMixTest.Detector.Helpers do
   use ExUnit.Case
   alias FinalMix.Detector.Helpers
+  alias FinalMix.Detector.Config
   alias Ethereum.Eth.V1alpha1.IndexedAttestation
   alias Ethereum.Eth.V1alpha1.AttestationData
   alias Ethereum.Eth.V1alpha1.Checkpoint
@@ -31,7 +32,7 @@ defmodule FinalMixTest.Detector.Helpers do
       assert Helpers.group_by_validator_chunk_index(atts) == wanted
     end
 
-    test "advanced properly groups multiple attestations" do
+    test "properly groups multiple attestations" do
       att1 = IndexedAttestation.new(attesting_indices: [0])
       att2 = IndexedAttestation.new(attesting_indices: [0])
       att3 = IndexedAttestation.new(attesting_indices: [1])
@@ -44,7 +45,7 @@ defmodule FinalMixTest.Detector.Helpers do
         1 => [att5, att6]
       }
 
-      assert Helpers.advanced_group_by_validator_chunk_index([att1, att2, att3, att4, att5, att6]) ==
+      assert Helpers.group_by_validator_chunk_index([att1, att2, att3, att4, att5, att6]) ==
                wanted
     end
   end
@@ -54,14 +55,14 @@ defmodule FinalMixTest.Detector.Helpers do
       att1 = %IndexedAttestation{
         data: %AttestationData{
           source: %Checkpoint{
-            epoch: 1,
+            epoch: Config.start_epoch_from_chunk_index(0),
           }
         }
       }
       att2 = %IndexedAttestation{
         data: %AttestationData{
           source: %Checkpoint{
-            epoch: 4097,
+            epoch: Config.start_epoch_from_chunk_index(1),
           }
         }
       }

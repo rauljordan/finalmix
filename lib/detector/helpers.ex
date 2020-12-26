@@ -27,18 +27,17 @@ defmodule FinalMix.Detector.Helpers do
           required(integer()) => [IndexedAttestation]
         }
   def group_by_validator_chunk_index(atts) do
-    # Group into a map where the keys are
-    # validator chunk indices and the values are
-    # lists of attestations grouped for a validator chunk index
-    group_attestations_by(
-      atts,
-      # Select attesting indices
-      fn att -> att.attesting_indices end,
-      # Transform each into a validator chunk idx
-      fn validator_idx ->
-        Config.validator_chunk_index(validator_idx)
-      end
-    )
+    pairs =
+      Enum.flat_map(atts, fn att ->
+        Enum.map(att.attesting_indices, &{&1, att})
+      end)
+
+    transformed_pairs =
+      Enum.map(pairs, fn {val_idx, list} ->
+        {Config.validator_chunk_index(val_idx), list}
+      end)
+
+    Enum.group_by(transformed_pairs, fn {key, _} -> key end, fn {_, list} -> list end)
   end
 
   @doc """
@@ -53,32 +52,10 @@ defmodule FinalMix.Detector.Helpers do
           required(integer()) => [IndexedAttestation]
         }
   def group_by_chunk_index(atts) do
-    # Group into a map where the keys are
-    # chunk indices for source epochs and the values are
-    # lists of attestations grouped for that chunk index
-    group_attestations_by(
-      atts,
-      # Select source epoch
-      fn att -> att.data.source.epoch end,
-      # Transform each source epoch into a chunk index
-      fn epoch -> Config.chunk_index(epoch) end
-    )
-  end
-
-  # Groups attestations into a map where for each, we select
-  # a field from the attestation, then we transform the field
-  # and group attestations into lists for each of those fields
-  defp group_attestations_by(atts, select_field, transform_field) do
-    pairs =
-      Enum.flat_map(atts, fn att ->
-        Enum.map(select_field.(att), &{&1, att})
-      end)
-
     transformed_pairs =
-      Enum.map(pairs, fn {key, val} ->
-        {transform_field.(key), val}
+      Enum.map(atts, fn att ->
+        {Config.chunk_index(att.data.source.epoch), att}
       end)
-
     Enum.group_by(transformed_pairs, fn {key, _} -> key end, fn {_, val} -> val end)
   end
 end
