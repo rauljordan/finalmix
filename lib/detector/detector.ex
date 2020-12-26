@@ -43,17 +43,20 @@ defmodule FinalMix.Detector do
 
     Logger.info("Updating spans for #{Enum.count(batches)} batches of grouped attestations")
 
-    Enum.each(batches, fn {_, atts} ->
+    Enum.each batches, fn {_, atts} ->
       atts_by_chunk_idx =
         atts
         |> Helpers.group_by_chunk_index()
-
-      update_max_spans(atts_by_chunk_idx)
-    end)
+      update_arrays(atts_by_chunk_idx)
+    end
+    Logger.info("Finished updating arrays for #{Enum.count(batches)} batches")
   end
 
-  defp update_max_spans(_atts_by_chunk_idx) do
-    nil
+  defp update_arrays(atts_by_chunk_idx) do
+    updated_chunks = Map.new()
+    Enum.reduce atts_by_chunk_idx, updated_chunks, fn ({_chunk_idx, _atts}, acc) ->
+      acc
+    end
   end
 
   defp schedule_queue_processing() do

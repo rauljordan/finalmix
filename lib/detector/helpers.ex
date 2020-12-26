@@ -6,8 +6,8 @@ defmodule FinalMix.Detector.Helpers do
   def group_by_validator_index(nil), do: Map.new()
 
   @spec group_by_validator_index([IndexedAttestation]) :: %{
-          required(integer()) => [IndexedAttestation]
-        }
+    required(integer()) => [IndexedAttestation]
+  }
   def group_by_validator_index(atts) do
     # Reduce into a map where the keys are
     # validator chunk indices and the values are
@@ -33,8 +33,8 @@ defmodule FinalMix.Detector.Helpers do
   end
 
   @spec group_by_chunk_index([IndexedAttestation]) :: %{
-          required(integer()) => [IndexedAttestation]
-        }
+    required(integer()) => [IndexedAttestation]
+  }
   def group_by_chunk_index(atts) do
     atts_by_chunk = Map.new()
 
