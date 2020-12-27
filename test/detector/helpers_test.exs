@@ -26,9 +26,11 @@ defmodule FinalMixTest.Detector.Helpers do
         %IndexedAttestation{attesting_indices: [1]},
         %IndexedAttestation{attesting_indices: [2]}
       ]
+
       wanted = %{
         0 => atts
       }
+
       assert Helpers.group_by_validator_chunk_index(atts) == wanted
     end
 
@@ -55,21 +57,24 @@ defmodule FinalMixTest.Detector.Helpers do
       att1 = %IndexedAttestation{
         data: %AttestationData{
           source: %Checkpoint{
-            epoch: Config.start_epoch_from_chunk_index(0),
+            epoch: Config.start_epoch_from_chunk_index(0)
           }
         }
       }
+
       att2 = %IndexedAttestation{
         data: %AttestationData{
           source: %Checkpoint{
-            epoch: Config.start_epoch_from_chunk_index(1),
+            epoch: Config.start_epoch_from_chunk_index(1)
           }
         }
       }
+
       wanted = %{
         0 => [att1],
         1 => [att2]
       }
+
       assert Helpers.group_by_chunk_index([att1, att2]) == wanted
     end
   end

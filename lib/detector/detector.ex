@@ -2,6 +2,7 @@ defmodule FinalMix.Detector do
   use GenServer
   require Logger
   alias FinalMix.Detector.Config
+  alias FinalMix.DB
   alias FinalMix.Detector.Helpers
 
   @name __MODULE__
@@ -43,37 +44,51 @@ defmodule FinalMix.Detector do
 
     Logger.info("Updating spans for #{Enum.count(batches)} batches of grouped attestations")
 
-    Enum.each(batches, fn {_, atts} ->
+    Enum.each(batches, fn {validator_chunk_idx, atts} ->
       atts_by_chunk_idx =
         atts
         |> Helpers.group_by_chunk_index()
 
-      update_arrays(atts_by_chunk_idx)
+      update_arrays(validator_chunk_idx, atts_by_chunk_idx)
     end)
 
     Logger.info("Finished updating arrays for #{Enum.count(batches)} batches")
   end
 
-  defp update_arrays(atts_by_chunk) do
+  defp update_arrays(validator_chunk_idx, atts_by_chunk) do
     chunks = Map.new()
 
-    Enum.reduce(atts_by_chunk, chunks, fn {chunk_idx, atts}, map ->
-      Enum.reduce(atts, map, fn att, acc ->
+    # Groups our data into triples of (chunk_idx, validator_chunk_idx, att)
+    # For every attestation in our batch that contains an attesting index
+    # which maps to the validator chunk index we care about
+    verify_validator_chunk_idx = fn idx ->
+      Config.validator_chunk_index(idx) == validator_chunk_idx
+    end
+
+    pre_process = fn {chunk_idx, atts} ->
+      Enum.flat_map(atts, fn att ->
         att.attesting_indices
-        |> Enum.filter(fn idx -> idx == Config.validator_chunk_index(idx) end)
-        |> Enum.reduce(acc, fn validator_idx, acc2 ->
-          apply_attestation_for_validator(acc2, chunk_idx, validator_idx, att)
-        end)
+        |> Enum.filter(verify_validator_chunk_idx)
+        |> Enum.map(&{chunk_idx, &1, att})
       end)
+    end
+
+    triples =
+      atts_by_chunk
+      |> Enum.flat_map(pre_process)
+
+    # Apply the attestation for appropriate validators by updating their
+    # chunks and reducing into a map containing the chunks which
+    # where updated from the operation
+    Enum.reduce(triples, chunks, fn {chunk_idx, validator_chunk_idx, att}, map ->
+      apply_attestation_for_validator(map, chunk_idx, validator_chunk_idx, att)
     end)
   end
 
-  def apply_attestation_for_validator(map, validator_chunk_idx, validator_idx, att) do
-    map
+  defp apply_attestation_for_validator(map, validator_chunk_idx, validator_idx, att) do
   end
 
   defp schedule_queue_processing() do
-    # Every 5 seconds
     Process.send_after(self(), :process_queued, Config.update_interval_seconds() * 1000)
   end
 end

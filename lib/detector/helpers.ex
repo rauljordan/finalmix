@@ -56,6 +56,7 @@ defmodule FinalMix.Detector.Helpers do
       Enum.map(atts, fn att ->
         {Config.chunk_index(att.data.source.epoch), att}
       end)
+
     Enum.group_by(transformed_pairs, fn {key, _} -> key end, fn {_, val} -> val end)
   end
 end
