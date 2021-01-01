@@ -8,9 +8,9 @@ defmodule FinalMix.Supervisor do
   @impl true
   def init(:ok) do
     children = [
-      {FinalMix.DB, name: FinalMix.DB},
-      {FinalMix.BeaconClient, name: FinalMix.BeaconClient},
-      {FinalMix.Detector, name: FinalMix.Detector}
+      # {FinalMix.DB, name: FinalMix.DB},
+      # {FinalMix.BeaconClient, name: FinalMix.BeaconClient},
+      # {FinalMix.Detector, name: FinalMix.Detector}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
