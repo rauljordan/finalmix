@@ -1,7 +1,7 @@
 defmodule FinalMix.Chunks.Helpers do
   alias FinalMix.Detector.Config
 
-  def get_chunk_target(chunk, validator_idx, epoch, target_epoch) do
+  def get_chunk_target(chunk, validator_idx, epoch) do
     # TODO: Verify lengths
     validator_offset = Config.validator_offset(validator_idx)
     chunk_offset = Config.chunk_offset(epoch)

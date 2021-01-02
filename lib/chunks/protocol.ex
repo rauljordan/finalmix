@@ -4,6 +4,13 @@ defprotocol FinalMix.TargetListChunk do
   def neutral_element(t)
 
   @doc """
+  Determines whether an attestation is slashable with
+  regards to the data in the chunk
+  """
+  @spec check_slashable(t, any) :: boolean()
+  def check_slashable(t, attestation)
+
+  @doc """
   Updates a target list chunk and returns a boolean we can use
   to determine if we should continue updating the next possible chunk
   """
